@@ -1,0 +1,131 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String   @id @default(uuid())
+  email    String   @unique
+  name     String?
+  penName  String    @unique
+  details String?
+  profilePic String?
+  password String
+  postCount Int? @default(0)
+  creationDate DateTime @default(now())
+  author Author[]
+  bookmarks Bookmark[]
+  claps Clap[]
+  comments Comment[]
+  posts Post[]
+  topic Topic[]
+  userTopic UserTopic[]
+}
+
+model Author{
+  id String @id @default(uuid())
+  penName String @unique
+  creationDate DateTime @default(now())
+  postCount Int? @default(0)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId String @unique
+  posts Post[]
+}
+
+model Post{
+  id String @id @default(uuid())
+  title String?
+  content String?
+  published Boolean
+  publishedDate DateTime @default(now())
+  topic Topic? @relation(fields: [topicName], references: [topicName], onUpdate: Cascade)
+  topicName String?
+  user User @relation(fields: [userPenName], references: [penName], onDelete: Cascade)
+  userPenName String
+  author Author @relation(fields: [authorPenName], references: [penName], onDelete: Cascade)
+  authorPenName String
+  bookmarks Bookmark[]
+  claps Clap[]
+  comments Comment[]
+}
+
+model Bookmark{
+  id String @id @default(uuid())
+  hasBookmarked Boolean @default(true)
+  bookmarkCount Int @default(1)
+  createdAt DateTime @default(now())
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  posts Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+
+  @@unique([userId, postId])
+}
+
+model Clap{
+  id String @id @default(uuid())
+  hasLiked Boolean @default(true)
+  clapCount Int @default(1)
+  createdAt DateTime @default(now())
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+  comment Comment? @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  commentId String?
+
+}
+
+model Comment{
+  id String @id @default(uuid())
+  message String
+  createdAt DateTime @default(now())
+  updatedAt DateTime? @default(now())
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+  parent Comment? @relation("ParentChild", fields: [parentId], references: [id], onDelete: Cascade)
+  parentId String?
+  children Comment[] @relation("ParentChild")
+  claps Clap[]
+}
+
+model Topic{
+  id String @id @default(uuid())
+  topicName String @unique
+  createdAt DateTime @default(now())
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  posts Post[]
+  userTopic UserTopic[]
+}
+
+model UserTopic{
+  id String @id @default(uuid())
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  topic Topic @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  topicId String
+
+  @@unique([userId, topicId])
+}
+
+// model PostTopic{
+//   post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+//   postId String
+//   topic Topic @relation(fields: [topicId], references: [id], onDelete: Cascade)
+//   topicId String
+
+//   @@id([postId, topicId])
+// }

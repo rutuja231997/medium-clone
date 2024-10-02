@@ -1,0 +1,14 @@
+name = "backend"
+compatibility_date = "2024-09-09"
+compatibility_flags = [ "nodejs_compat" ]
+
+[vars]
+DATABASE_URL="your prisma connection string"
+
+JWT_SECRET = "your secret"
+
+R2_SUBDOMAIN_URL = "your R2_SUBDOMAIN_URL string"
+
+[[r2_buckets]]
+binding = "your bucket binding"
+bucket_name = "your bucket name"

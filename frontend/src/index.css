@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.box-shadow {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.font-type {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.toggle-div-border {
+  border-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgb(242, 242, 242);
+}
+
+.margin-blog {
+  margin-right: 26rem;
+}
+
+.margin-bookmarkCard {
+  margin-right: 22rem;
+}
+
+.likeCount {
+  font-size: 12px;
+  margin-left: 0.2rem;
+}
+
+.space-between-profile {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bg-custom-gradient {
+  background-image: linear-gradient(
+    107.7deg,
+    rgba(235, 230, 44, 0.55) 8.4%,
+    rgba(252, 152, 15, 1) 90.3%
+  );
+}
+
+.recommended-title {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  font-size: 15px; /* Adjust font size as needed */
+  letter-spacing: 0px;
+  line-height: 16px;
+}
+
+@layer utilities {
+  .text-main {
+    @apply text-black dark:text-gray-300;
+  }
+
+  .text-sub {
+    @apply text-gray-500 dark:text-gray-400;
+  }
+
+  .bg-main {
+    @apply bg-white dark:bg-slate-900;
+  }
+
+  .bg-sub {
+    @apply bg-gray-100 dark:bg-slate-900;
+  }
+
+  .border-main {
+    @apply border border-gray-200 dark:border-slate-800;
+  }
+}
+.custom-quill .ql-editor::before {
+  font-family: Lora;
+  font-size: 18px; /* Adjust the placeholder font size */
+  font-style: normal; /* Make placeholder italic if desired */
+  color: #b0b0b0; /* Set placeholder text color */
+  left: 0; /* Adjust position if needed */
+}
+
+.blogCard-title {
+  font-size: 25px;
+  font-weight: bold;
+  line-height: 28px;
+  color: black;
+  text-wrap: wrap;
+  letter-spacing: -1px;
+}
+
+.content-preview {
+  font-size: 16px;
+  font-style: normal;
+  color: #6d7378;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.custom-quill .ql-editor {
+  font-family: Lora;
+  font-size: 18px; /* Adjust the size */
+  line-height: 1.5; /* Adjust line height if needed */
+  color: #000000; /* Set the text color */
+  margin-left: -1rem;
+}
+
+.lucida {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-size: large;
+  font-weight: 600;
+  font-style: bold;
+  color: black;
+}

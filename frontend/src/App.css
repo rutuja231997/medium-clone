@@ -1,0 +1,23 @@
+/* App.css */
+.tabs {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.tab-button {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  cursor: pointer;
+  margin-right: 1px;
+}
+
+.tab-button.active {
+  background: #ddd;
+  font-weight: bold;
+}
+
+.tab-content {
+  padding: 1rem;
+  border: 1px solid #ddd;
+}
